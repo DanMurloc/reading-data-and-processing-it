@@ -19,11 +19,15 @@ namespace Metodi
         public Form1()
         {
             InitializeComponent();
+            // Получаем путь к папке с приложением
+            string folderPath = AppDomain.CurrentDomain.BaseDirectory;
 
+            // Формируем полный путь к файлу
+            string filePath = Path.Combine(folderPath, "data1.csv");
             //задание 1
             double[,] finalArr =new double[0,0];
    
-            ReadCvc.ReadToArr(ref finalArr);
+            ReadCvc.ReadToArr(ref finalArr, filePath);
             List<List<double>> list = new List<List<double>>();
             Quest1.AccsXYZ_g(finalArr, ref list);
             ChartXYZM_sQ1(list);
@@ -31,7 +35,7 @@ namespace Metodi
             //задание 2
 
             finalArr = new double[0, 0];
-            ReadCvc.ReadToArr(ref finalArr);
+            ReadCvc.ReadToArr(ref finalArr, filePath);
             Quest1.Gyro_g(finalArr, ref list);
             ChartXYZG_SQ2(list);
             list.Clear();
@@ -40,7 +44,12 @@ namespace Metodi
             QChart2(list);
 
             // задаение 3
-
+            filePath = Path.Combine(folderPath, "data2.csv");
+            //задание 1
+            finalArr = new double[0, 0];
+            list.Clear();
+            ReadCvc.ReadToArr(ref finalArr, filePath);
+            list = new List<List<double>>();
 
         }
 
@@ -108,8 +117,6 @@ namespace Metodi
             chart3.ChartAreas[0].AxisX.TitleFont = new Font("Arial", 12f);
             chart3.ChartAreas[0].AxisY.TitleFont = new Font("Arial", 12f);
         }
-
-
 
         public void ChartXYZG_SQ2(List<List<double>> list)
         {

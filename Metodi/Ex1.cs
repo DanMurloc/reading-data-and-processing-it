@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -85,12 +86,57 @@ namespace Metodi
                 l3.Add(angle_z_t);
                 lt.Add(finalArr[i, 0]);
             }
+
+            double[] AXT = l1.ToArray();
+            double[] AYT = l1.ToArray();
+            double[] AZT = l1.ToArray();
+            // Получаем путь к папке с приложением
+           
+
             list.Add(l1);
             list.Add(l2);
             list.Add(l3);
             list.Add(lt);
+
+
+            string folderPath = AppDomain.CurrentDomain.BaseDirectory;
+            // Пути к файлам
+            string filePath1 = Path.Combine(folderPath, "angle_x_t.txt");
+            string filePath2 = Path.Combine(folderPath, "angle_y_t.txt");
+            string filePath3 = Path.Combine(folderPath, "angle_z_t.txt");
+            // Создаем файлы, если они не существуют
+            CreateFileIfNotExists(filePath1);
+            CreateFileIfNotExists(filePath2);
+            CreateFileIfNotExists(filePath3);
+
+            // Запись данных в файл angle_x_t.txt
+            WriteToFileIfExists(filePath1, AXT);
+
+            // Запись данных в файл angle_y_t.txt
+            WriteToFileIfExists(filePath2, AYT);
+
+            // Запись данных в файл angle_z_t.txt
+            WriteToFileIfExists(filePath3, AZT);
         }
 
+        static void CreateFileIfNotExists(string filePath)
+        {
+            if (!File.Exists(filePath))
+            {
+                using (File.Create(filePath)) { }
+            }
+        }
+        static void WriteToFileIfExists(string filePath, double[] data)
+        {
+
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                foreach (double value in data)
+                {
+                    writer.WriteLine(value);
+                }
+            }
+        }
 
         public static void Gyro_g(double[,] finalArr, ref List<List<double>> list)
         {
