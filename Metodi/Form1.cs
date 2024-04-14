@@ -45,7 +45,7 @@ namespace Metodi
             QChart2(list);
       
 
-
+            /*
             // задаение 3
             filePath = Path.Combine(folderPath, "data2.csv");
             //задание 1
@@ -55,6 +55,8 @@ namespace Metodi
             list = new List<List<double>>();
             EX3.QuatToEaler(ref list, finalArr);
             Quest3(list);
+            list.Clear();
+            */
 
         }
 
@@ -188,7 +190,6 @@ namespace Metodi
             chart6.ChartAreas[0].AxisX.TitleFont = new Font("Arial", 12f);
             chart6.ChartAreas[0].AxisY.TitleFont = new Font("Arial", 12f);
         }
-
         private void TIMECHAST(double[] lt)
         {
             //Количество измерений
@@ -219,9 +220,7 @@ namespace Metodi
             label3.Text = "Минимальная частота: " + Hz1.ToString() + "\tГЦ"+ "Максимальная частота: " + Hz2.ToString() + "ГЦ";
             
         }
-
         //второе задание
-
         public void QChart2(List<List<double>> list)
         {
             double[] l1 = list[0].ToArray();
@@ -360,13 +359,10 @@ namespace Metodi
             label8.Text = sum.ToString() + " Градус по Z";
             label9.Text = ((int)(sum / 360)).ToString() + " Оборотов по Z";
         }
-
         private void chart1_Click(object sender, EventArgs e)
         {
 
         }
-
-
         private void Quest3(List<List<double>> list)
         {
             double[] l1 = list[0].ToArray();
@@ -376,9 +372,58 @@ namespace Metodi
             ChartElX(l1, lt);
             ChartElY(l2, lt);
             ChartElZ(l3, lt);
+            Dreyf(l3, lt);
+            //вариация алана
+            /*
+            double[] l4 = list[4].ToArray();
+            var diap = new List<double>();
+            var result = new List<double>();
+            AllanVariance(l4, ref result, ref diap);
+            ChartAlanAX(result.ToArray(), diap.ToArray());
+            diap.Clear();
+            result.Clear();
+
+            double[] l5 = list[5].ToArray();
+            AllanVariance(l5, ref result, ref diap);
+            ChartAlanAY(result.ToArray(), diap.ToArray());
+            diap.Clear();
+            result.Clear();
+
+            double[] l6 = list[6].ToArray();
+            AllanVariance(l6, ref result, ref diap);
+            ChartAlanAZ(result.ToArray(), diap.ToArray());
+            diap.Clear();
+            result.Clear();
+
+            double[] l7 = list[7].ToArray();
+            AllanVariance(l7, ref result, ref diap);
+            ChartAlanGX(result.ToArray(), diap.ToArray());
+            diap.Clear();
+            result.Clear();
+
+
+            double[] l8 = list[8].ToArray();
+            AllanVariance(l8, ref result, ref diap);
+            ChartAlanGY(result.ToArray(), diap.ToArray());
+            diap.Clear();
+            result.Clear();
+
+
+            double[] l9 = list[9].ToArray();
+            AllanVariance(l9, ref result, ref diap);
+            ChartAlanGZ(result.ToArray(), diap.ToArray());
+            diap.Clear();
+            result.Clear();
+            */
         }
 
+        private void Dreyf(double[] l1, double[] lt)
+        {
+            double dreyf = ((l1[l1.Length - 1] - l1[0]) / (lt[lt.Length - 1] - lt[0])) * 3600;
 
+
+            label11.Text = dreyf.ToString()+" "+"Градус/ч";
+        }
         private void ChartElX(double[] l1, double[] lt)
         {
             for (int i = 0; i < l1.Length; i++)
@@ -397,7 +442,6 @@ namespace Metodi
             chart10.ChartAreas[0].AxisX.TitleFont = new Font("Arial", 12f);
             chart10.ChartAreas[0].AxisY.TitleFont = new Font("Arial", 12f);
         }
-
         private void ChartElY(double[] l1, double[] lt)
         {
             for (int i = 0; i < l1.Length; i++)
@@ -416,7 +460,6 @@ namespace Metodi
             chart11.ChartAreas[0].AxisX.TitleFont = new Font("Arial", 12f);
             chart11.ChartAreas[0].AxisY.TitleFont = new Font("Arial", 12f);
         }
-
         private void ChartElZ(double[] l1, double[] lt)
         {
             for (int i = 0; i < l1.Length; i++)
@@ -434,6 +477,187 @@ namespace Metodi
             // Установка размера шрифта для подписей осей
             chart12.ChartAreas[0].AxisX.TitleFont = new Font("Arial", 12f);
             chart12.ChartAreas[0].AxisY.TitleFont = new Font("Arial", 12f);
+        }
+
+        private void ChartAlanAX(double[] l1, double[] lt)
+        {
+            for (int i = 0; i < l1.Length; i++)
+            {
+                chart13.Series[0].Points.Add(new DataPoint(lt[i], l1[i]));
+            }
+            // Установка логарифмической шкалы для оси X
+            chart13.ChartAreas[0].AxisX.IsLogarithmic = true;
+            // Установка логарифмической шкалы для оси Y
+            chart13.ChartAreas[0].AxisY.IsLogarithmic = true;
+
+            // Нас  тройка меток осей X и Y
+            chart13.ChartAreas[0].AxisX.Title = "Tau";
+            chart13.ChartAreas[0].AxisY.Title = "Вариация Аллана";
+            //chart10.ChartAreas[0].AxisX.Interval = 5; // Интервал между метками по оси X
+            //chart10.ChartAreas[0].AxisY.Interval = 5; // Интервал между метками по оси X
+            // Установка размера шрифта подписей осей
+            chart13.ChartAreas[0].AxisX.LabelStyle.Font = new Font("Arial", 12f);
+            chart13.ChartAreas[0].AxisY.LabelStyle.Font = new Font("Arial", 12f);
+            // Установка размера шрифта для подписей осей
+            chart13.ChartAreas[0].AxisX.TitleFont = new Font("Arial", 12f);
+            chart13.ChartAreas[0].AxisY.TitleFont = new Font("Arial", 12f);
+        }
+
+
+        private void ChartAlanAY(double[] l1, double[] lt)
+        {
+            for (int i = 0; i < l1.Length; i++)
+            {
+                chart14.Series[0].Points.Add(new DataPoint(lt[i], l1[i]));
+            }
+            // Установка логарифмической шкалы для оси X
+            chart14.ChartAreas[0].AxisX.IsLogarithmic = true;
+            // Установка логарифмической шкалы для оси Y
+            chart14.ChartAreas[0].AxisY.IsLogarithmic = true;
+
+            // Нас  тройка меток осей X и Y
+            chart14.ChartAreas[0].AxisX.Title = "Tau";
+            chart14.ChartAreas[0].AxisY.Title = "Вариация Аллана";
+            //chart10.ChartAreas[0].AxisX.Interval = 5; // Интервал между метками по оси X
+            //chart10.ChartAreas[0].AxisY.Interval = 5; // Интервал между метками по оси X
+            // Установка размера шрифта подписей осей
+            chart14.ChartAreas[0].AxisX.LabelStyle.Font = new Font("Arial", 12f);
+            chart14.ChartAreas[0].AxisY.LabelStyle.Font = new Font("Arial", 12f);
+            // Установка размера шрифта для подписей осей
+            chart14.ChartAreas[0].AxisX.TitleFont = new Font("Arial", 12f);
+            chart14.ChartAreas[0].AxisY.TitleFont = new Font("Arial", 12f);
+        }
+
+
+        private void ChartAlanAZ(double[] l1, double[] lt)
+        {
+            for (int i = 0; i < l1.Length; i++)
+            {
+                chart15.Series[0].Points.Add(new DataPoint(lt[i], l1[i]));
+            }
+            // Установка логарифмической шкалы для оси X
+            chart15.ChartAreas[0].AxisX.IsLogarithmic = true;
+            // Установка логарифмической шкалы для оси Y
+            chart15.ChartAreas[0].AxisY.IsLogarithmic = true;
+
+            // Нас  тройка меток осей X и Y
+            chart15.ChartAreas[0].AxisX.Title = "Tau";
+            chart15.ChartAreas[0].AxisY.Title = "Вариация Аллана";
+            //chart10.ChartAreas[0].AxisX.Interval = 5; // Интервал между метками по оси X
+            //chart10.ChartAreas[0].AxisY.Interval = 5; // Интервал между метками по оси X
+            // Установка размера шрифта подписей осей
+            chart15.ChartAreas[0].AxisX.LabelStyle.Font = new Font("Arial", 12f);
+            chart15.ChartAreas[0].AxisY.LabelStyle.Font = new Font("Arial", 12f);
+            // Установка размера шрифта для подписей осей
+            chart15.ChartAreas[0].AxisX.TitleFont = new Font("Arial", 12f);
+            chart15.ChartAreas[0].AxisY.TitleFont = new Font("Arial", 12f);
+        }
+
+        private void ChartAlanGX(double[] l1, double[] lt)
+        {
+            for (int i = 0; i < l1.Length; i++)
+            {
+                chart16.Series[0].Points.Add(new DataPoint(lt[i], l1[i]));
+            }
+            // Установка логарифмической шкалы для оси X
+            chart16.ChartAreas[0].AxisX.IsLogarithmic = true;
+            // Установка логарифмической шкалы для оси Y
+            chart16.ChartAreas[0].AxisY.IsLogarithmic = true;
+
+            // Нас  тройка меток осей X и Y
+            chart16.ChartAreas[0].AxisX.Title = "Tau";
+            chart16.ChartAreas[0].AxisY.Title = "Вариация Аллана";
+            //chart10.ChartAreas[0].AxisX.Interval = 5; // Интервал между метками по оси X
+            //chart10.ChartAreas[0].AxisY.Interval = 5; // Интервал между метками по оси X
+            // Установка размера шрифта подписей осей
+            chart16.ChartAreas[0].AxisX.LabelStyle.Font = new Font("Arial", 12f);
+            chart16.ChartAreas[0].AxisY.LabelStyle.Font = new Font("Arial", 12f);
+            // Установка размера шрифта для подписей осей
+            chart16.ChartAreas[0].AxisX.TitleFont = new Font("Arial", 12f);
+            chart16.ChartAreas[0].AxisY.TitleFont = new Font("Arial", 12f);
+        }
+        private void ChartAlanGY(double[] l1, double[] lt)
+        {
+            for (int i = 0; i < l1.Length; i++)
+            {
+                chart17.Series[0].Points.Add(new DataPoint(lt[i], l1[i]));
+            }
+            // Установка логарифмической шкалы для оси X
+            chart17.ChartAreas[0].AxisX.IsLogarithmic = true;
+            // Установка логарифмической шкалы для оси Y
+            chart17.ChartAreas[0].AxisY.IsLogarithmic = true;
+
+            // Нас  тройка меток осей X и Y
+            chart17.ChartAreas[0].AxisX.Title = "Tau";
+            chart17.ChartAreas[0].AxisY.Title = "Вариация Аллана";
+            //chart10.ChartAreas[0].AxisX.Interval = 5; // Интервал между метками по оси X
+            //chart10.ChartAreas[0].AxisY.Interval = 5; // Интервал между метками по оси X
+            // Установка размера шрифта подписей осей
+            chart17.ChartAreas[0].AxisX.LabelStyle.Font = new Font("Arial", 12f);
+            chart17.ChartAreas[0].AxisY.LabelStyle.Font = new Font("Arial", 12f);
+            // Установка размера шрифта для подписей осей
+            chart17.ChartAreas[0].AxisX.TitleFont = new Font("Arial", 12f);
+            chart17.ChartAreas[0].AxisY.TitleFont = new Font("Arial", 12f);
+        }
+
+        private void ChartAlanGZ(double[] l1, double[] lt)
+        {
+            for (int i = 0; i < l1.Length; i++)
+            {
+                chart18.Series[0].Points.Add(new DataPoint(lt[i], l1[i]));
+            }
+            // Установка логарифмической шкалы для оси X
+            chart18.ChartAreas[0].AxisX.IsLogarithmic = true;
+            // Установка логарифмической шкалы для оси Y
+            chart18.ChartAreas[0].AxisY.IsLogarithmic = true;
+
+            // Нас  тройка меток осей X и Y
+            chart18.ChartAreas[0].AxisX.Title = "Tau";
+            chart18.ChartAreas[0].AxisY.Title = "Вариация Аллана";
+            //chart10.ChartAreas[0].AxisX.Interval = 5; // Интервал между метками по оси X
+            //chart10.ChartAreas[0].AxisY.Interval = 5; // Интервал между метками по оси X
+            // Установка размера шрифта подписей осей
+            chart18.ChartAreas[0].AxisX.LabelStyle.Font = new Font("Arial", 12f);
+            chart18.ChartAreas[0].AxisY.LabelStyle.Font = new Font("Arial", 12f);
+            // Установка размера шрифта для подписей осей
+            chart18.ChartAreas[0].AxisX.TitleFont = new Font("Arial", 12f);
+            chart18.ChartAreas[0].AxisY.TitleFont = new Font("Arial", 12f);
+        }
+
+        // Функция для вычисления вариации Аллана
+        static void AllanVariance(double[] storageMath,ref List<double> result, ref List<double> diap)
+        {
+            result = new List<double>();   
+
+            int N = storageMath.Length; // определяем кол-во элементов входного массива
+            double sum;
+            int myN;
+            int i, j, k;
+            double[] avr;
+            avr = new double[N];
+            int shag = 0;
+
+            for (i = 1; i <= N / 500; i++)
+            {
+                myN = N / i; // усредняем диапазон
+                for (j = 0; j <= myN - 1; j++)
+                {
+                    sum = 0;
+                    for (k = j * i; k < j * i + i; k++)
+                    {
+                        sum += storageMath[k]; // суммируем элементы
+                    }
+                    avr[j] = sum / i; // делим суммы элементов на кол-во
+                }
+                sum = 0; // обнуляем
+                for (j = 0; j < (myN - 1); j++)
+                {
+                    sum += Math.Pow((avr[j + 1] - avr[j]), 2); // вычисляем разницы средних значений
+                } 
+                result.Add(Math.Sqrt(sum / (2 * (myN - 1))));
+                diap.Add(shag);
+                shag += 500;
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)

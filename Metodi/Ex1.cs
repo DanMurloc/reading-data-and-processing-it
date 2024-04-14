@@ -187,12 +187,12 @@ namespace Metodi
                 double axy_z0 = finalArr[i, 3];
     
                 double AX_X0 = (double)(axy_x0 / (double)Accel_LSB) * g;
-                double angle_accelx0 = 57.2958 * Math.Acos(AX_X0);
+
 
                 double AY_Y0 = (double)(axy_y0 / (double)Accel_LSB) * g;
-                double angle_accely0 = 57.2958 * Math.Acos(AY_Y0);
+     
                 double AZ_Z0 = (double)(axy_z0 / (double)Accel_LSB) * g;
-                double angle_accelz0 = 0;
+   
 
                 l1.Add(AX_X0);
                 l2.Add(AY_Y0);
