@@ -108,7 +108,7 @@ namespace Metodi
             CreateFileIfNotExists(filePath1);
             CreateFileIfNotExists(filePath2);
             CreateFileIfNotExists(filePath3);
-
+           
             // Запись данных в файл angle_x_t.txt
             WriteToFileIfExists(filePath1, AXT);
 

@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ex1.cs" />
+    <Compile Include="EX3.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

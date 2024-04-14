@@ -40,8 +40,11 @@ namespace Metodi
             ChartXYZG_SQ2(list);
             list.Clear();
 
+        
             Quest1.Char1AxiXYZM_s(finalArr, ref list);
             QChart2(list);
+      
+
 
             // задаение 3
             filePath = Path.Combine(folderPath, "data2.csv");
@@ -50,6 +53,8 @@ namespace Metodi
             list.Clear();
             ReadCvc.ReadToArr(ref finalArr, filePath);
             list = new List<List<double>>();
+            EX3.QuatToEaler(ref list, finalArr);
+            Quest3(list);
 
         }
 
@@ -212,8 +217,7 @@ namespace Metodi
             double Hz1 = (double)(1 / dtmax);
             double Hz2 = (double)(1 / dtmin);
             label3.Text = "Минимальная частота: " + Hz1.ToString() + "\tГЦ"+ "Максимальная частота: " + Hz2.ToString() + "ГЦ";
-            Console.WriteLine(dtmax);
-            Console.WriteLine(dtmin);
+            
         }
 
         //второе задание
@@ -358,6 +362,81 @@ namespace Metodi
         }
 
         private void chart1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void Quest3(List<List<double>> list)
+        {
+            double[] l1 = list[0].ToArray();
+            double[] l2 = list[1].ToArray();
+            double[] l3 = list[2].ToArray();
+            double[] lt = list[3].ToArray();
+            ChartElX(l1, lt);
+            ChartElY(l2, lt);
+            ChartElZ(l3, lt);
+        }
+
+
+        private void ChartElX(double[] l1, double[] lt)
+        {
+            for (int i = 0; i < l1.Length; i++)
+            {
+                chart10.Series[0].Points.Add(new DataPoint(lt[i], l1[i]));
+            }
+            // Нас  тройка меток осей X и Y
+            chart10.ChartAreas[0].AxisX.Title = "Время, c";
+            chart10.ChartAreas[0].AxisY.Title = "Угол X, градус";
+            //chart10.ChartAreas[0].AxisX.Interval = 5; // Интервал между метками по оси X
+            //chart10.ChartAreas[0].AxisY.Interval = 5; // Интервал между метками по оси X
+            // Установка размера шрифта подписей осей
+            //chart1.ChartAreas[0].AxisX.LabelStyle.Font = new Font("Arial", 12f);
+            //chart1.ChartAreas[0].AxisY.LabelStyle.Font = new Font("Arial", 12f);
+            // Установка размера шрифта для подписей осей
+            chart10.ChartAreas[0].AxisX.TitleFont = new Font("Arial", 12f);
+            chart10.ChartAreas[0].AxisY.TitleFont = new Font("Arial", 12f);
+        }
+
+        private void ChartElY(double[] l1, double[] lt)
+        {
+            for (int i = 0; i < l1.Length; i++)
+            {
+                chart11.Series[0].Points.Add(new DataPoint(lt[i], l1[i]));
+            }
+            // Нас  тройка меток осей X и Y
+            chart11.ChartAreas[0].AxisX.Title = "Время, c";
+            chart11.ChartAreas[0].AxisY.Title = "Угол X, градус";
+            //chart10.ChartAreas[0].AxisX.Interval = 5; // Интервал между метками по оси X
+            //chart10.ChartAreas[0].AxisY.Interval = 5; // Интервал между метками по оси X
+            // Установка размера шрифта подписей осей
+            //chart1.ChartAreas[0].AxisX.LabelStyle.Font = new Font("Arial", 12f);
+            //chart1.ChartAreas[0].AxisY.LabelStyle.Font = new Font("Arial", 12f);
+            // Установка размера шрифта для подписей осей
+            chart11.ChartAreas[0].AxisX.TitleFont = new Font("Arial", 12f);
+            chart11.ChartAreas[0].AxisY.TitleFont = new Font("Arial", 12f);
+        }
+
+        private void ChartElZ(double[] l1, double[] lt)
+        {
+            for (int i = 0; i < l1.Length; i++)
+            {
+                chart12.Series[0].Points.Add(new DataPoint(lt[i], l1[i]));
+            }
+            // Нас  тройка меток осей X и Y
+            chart12.ChartAreas[0].AxisX.Title = "Время, c";
+            chart12.ChartAreas[0].AxisY.Title = "Угол X, градус";
+            //chart10.ChartAreas[0].AxisX.Interval = 5; // Интервал между метками по оси X
+            //chart10.ChartAreas[0].AxisY.Interval = 5; // Интервал между метками по оси X
+            // Установка размера шрифта подписей осей
+            //chart1.ChartAreas[0].AxisX.LabelStyle.Font = new Font("Arial", 12f);
+            //chart1.ChartAreas[0].AxisY.LabelStyle.Font = new Font("Arial", 12f);
+            // Установка размера шрифта для подписей осей
+            chart12.ChartAreas[0].AxisX.TitleFont = new Font("Arial", 12f);
+            chart12.ChartAreas[0].AxisY.TitleFont = new Font("Arial", 12f);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
         {
 
         }

@@ -34,7 +34,7 @@ namespace Metodi
                     twoDimensionalArray[i, j] = splitData[j];
                 }
             }
-            Console.WriteLine();
+
             double[,] arr = new double[twoDimensionalArray.GetLength(0), twoDimensionalArray.GetLength(1)];
 
             // Вывод двумерного массива
@@ -46,7 +46,7 @@ namespace Metodi
                     arr[i, j] = double.Parse(twoDimensionalArray[i, j], CultureInfo.InvariantCulture);
 
                 }
-                Console.WriteLine();
+         
             }
             array = arr;
         }
